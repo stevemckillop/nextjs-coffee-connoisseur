@@ -11,6 +11,9 @@ const CoffeeStore = () => {
       <Link href="/" >
         Back to Home
       </Link>
+      <Link href="/coffe-store/dynamic" >
+        Go to Page Dynamic
+      </Link>
     </div>
   )
 }
