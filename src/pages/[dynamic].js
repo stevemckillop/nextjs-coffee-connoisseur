@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Head from "next/head";
 
 
 const DynamicRoute = () => {
@@ -7,8 +8,11 @@ const DynamicRoute = () => {
   console.log("router", router);
   return (
     <div>
-      The current route is: {router.query.dynamic}
-      <br></br>
+      <Head>
+        <title>{router.query.dynamic}</title>
+      </Head>
+        The current route is: {router.query.dynamic}
+        <br></br>
       <Link href="/dynamic" >
         Go to Page Dynamic
       </Link>
