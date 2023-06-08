@@ -4,10 +4,20 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Banner from '../../components/banner';
 import Card from '../../components/card';
+import coffeeStores from '../../data/coffee-stores.json';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export async function getStaticProps(context) {
+  return {
+    props: {
+      coffeeStores,
+    }, // will be passed to the page component as props
+  };
+}
+
+export default function Home(props) {
+  console.log("props", props);
 
   const handleOnBannerClick = () => {
     console.log("Hi Banner Component")
@@ -27,10 +37,20 @@ export default function Home() {
         <div className={styles.heroImage}>
           <Image src="/static/hero-image.png" width={700} height={400}/>
         </div>
-        <Card
-          name="DarkHorse Coffee"
-          imgUrl="/../public/static/hero-image.png"
-          href="/coffee-store/darkhorse-cofee"/>
+        <div className={styles.cardLayout}>
+          {props.coffeeStores.map((coffeeStore) => {
+            return (
+              <Card
+                key={coffeeStore.id}
+                name={coffeeStore.name}
+                imgUrl={coffeeStore.imgUrl}
+                href={`/coffee-store/${coffeeStore.id}`}
+                className={styles.card}
+              />
+            )
+            }
+          )}
+        </div>
       </main>
     </>
   )
